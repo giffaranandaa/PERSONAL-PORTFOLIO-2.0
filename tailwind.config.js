@@ -1,28 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html'],
+  darkMode:'class',
   theme: {
     extend: {
       colors: {
         background: '#fffffe',
         secondary: '#d1d1e9',
         button: '#6246ea',
-        skills: '#6246ea',
-        paragraf: '#2b2c34'
-      },
-      screens: {
-        smm: "360px",
-        sm: "480px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px"
+        paragraf: '#2b2c34',
+        dark1: '#121212',
+        dark2: '#2a2929',
+        dark3: '#545151',
+        dark4: '#f0f0f0',
       },
       spacing: {
         "big": "35rem",
         "small": "25rem"
       },
       fontFamily: {
-        nunito: ['Nunito Sans', 'sans-serif']
+        nunito: ['Nunito Sans', 'sans-serif'],
+        covered: ['Covered By Your Grace', 'sans-serif'],
       },
       animation: {
         "goyang": 'goyang 3s linear infinite',
@@ -38,5 +36,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
+
 }

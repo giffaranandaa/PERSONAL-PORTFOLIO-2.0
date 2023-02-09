@@ -12,13 +12,18 @@ document.addEventListener("visibilitychange", function() {
 window.onscroll = function () {
     const header = document.querySelector('header');
     const fixedNav = header.offsetTop;
+    const toTop = document.querySelector('#to-top');
 
     if (window.pageYOffset > fixedNav) {
         header.classList.add('navbar-fixed');
+        toTop.classList.remove('hidden');
+        toTop.classList.add('flex');
     } else {
         header.classList.remove('navbar-fixed');
+        toTop.classList.remove('flex');
+        toTop.classList.add('hidden');
     }
-}
+};
 
 // smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -41,55 +46,45 @@ hamburger.addEventListener('click', function () {
     navMenu.addEventListener('click', function () {
         hamburger.classList.remove('hamburger-active');
         navMenu.classList.add('hidden');
-        });
-})
-
-
-// prgress bar 
-const progressBars = document.querySelectorAll(".bg-skills");
-var progressBarContainer = document.querySelector(".show-on-scroll");
-
-let start;
-document.onscroll = function(){
-    if (isElementInViewport(progressBarContainer)){
-        if(!start){
-            window.requestAnimationFrame(loop);
-        }
-    } else {
-        start = null;
-    }
-};
-const animationTime = 1000;
-
-function loop(timestamp){
-    if(!start){
-        start= timestamp;
-    }
-    const elapsed = timestamp - start;
-    const progress = elapsed / animationTime; 
-    progressBars.forEach((bar) => {
-        const progressComplete = bar.getAttribute("data-complete");
-        const width = Math.min(Math.ceil(progress * 100), progressComplete);
-        bar.style.width = width + "%";
-        bar.innerHTML = width + "%";
     });
-    if(progress <= 1){
-        window.requestAnimationFrame(loop);
+});
+
+// close navbar
+document.body.addEventListener('click', function (e) {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        hamburger.classList.remove('hamburger-active');
+        navMenu.classList.add('hidden');
     }
-}
+});
 
-function isElementInViewport(element){
-    var rectangel = element.getBoundingClientRect();
-    var height = window.innerHeight || document.documentElement.clientHeight;
-    var top = rectangel.top;
-    var bottom = rectangel.bottom;
+// darkmode
+const moon = document.querySelector("#moon");
+const html = document.querySelector("html");
 
-    return (
-        (top <= 0 && bottom >= 0) ||
-        (bottom >= height && top <= height) ||
-        (top >= 0 && bottom <= height)
-    );
-}
+moon.addEventListener("click", () => {
+    html.classList.toggle("dark");
+    localStorage.setItem("theme", html.classList.contains("dark") ? "dark" : "light");
+    
+    if (html.classList.contains("dark")) {
+    moon.src = "./img/moon.png";
+    } else {
+    moon.src = "./img/sun.png";
+    }
+});
+
+// cek icon darkmode
+if (localStorage.getItem("theme") === "dark") {
+    html.classList.add("dark");
+    moon.src = "./img/moon.png";
+    } else if (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    html.classList.add("dark");
+    moon.src = "./img/moon.png";
+    localStorage.setItem("theme", "dark");
+    } else {
+    html.classList.remove("dark");
+    moon.src = "./img/sun.png";
+    }
+  
 
 // AOS ANIMATE
 AOS.init({
