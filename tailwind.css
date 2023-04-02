@@ -15,7 +15,7 @@
 }
 
 .hamburger-line{
-    @apply w-[21px] h-[3px] my-1 block bg-paragraf dark:bg-dark4;
+    @apply w-[20px] h-[2.6px] my-1 block bg-paragraf dark:bg-dark4;
 }
 
 .hamburger-active > span:nth-child(1){
@@ -29,4 +29,71 @@
 .hamburger-active > span:nth-child(3){
     @apply -rotate-45;
 }
+  
+  .rotate {
+    background:;
+    animation: rotate 17s linear infinite;
+    overflow-x: hidden;
+    /* background: gray; */
+    z-index: 1;
+  }
+  
+  .ring {
+    transform: translate(-50%, -50%);
+    transition: 8s ease-out;
 
+  }
+  
+  .positioner {
+    transform: translateX(160px);
+    /* transition: transform 0.8s ease-out; */
+  }
+  
+  .planet {
+    animation: rotate 17s linear infinite;
+    animation-direction: reverse;
+  }
+  
+  .rotate:nth-child(1), .rotate:nth-child(1) .planet {
+    animation-delay: -1s;
+  }
+  .rotate:nth-child(2), .rotate:nth-child(2) .planet {
+    animation-delay: -4s;
+  }
+  .rotate:nth-child(3), .rotate:nth-child(3) .planet {
+    animation-delay: -6.7s;
+  }
+  .rotate:nth-child(4), .rotate:nth-child(4) .planet {
+    animation-delay: -9.6s;
+  }
+  .rotate:nth-child(5), .rotate:nth-child(5) .planet {
+    animation-delay: -12.3s;
+  }
+  .rotate:nth-child(6), .rotate:nth-child(6) .planet {
+    animation-delay: -15.1s;
+  } 
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .nav::after {
+    content: '';
+    position: absolute;
+    background: #6246ea;
+    height: 3px;
+    width: 0%;
+    left: 0px;
+    bottom: -2px;
+    transition-duration: 300ms;
+  }
+  
+  .nav:hover::after {
+    width: 100%;
+  }
+  
